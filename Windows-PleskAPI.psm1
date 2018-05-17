@@ -45,22 +45,22 @@
     [XML] $XMLDocument = @”
        
         <customer>
-        <add>
-            <gen_info>
-                <cname>$CName</cname>
-                <pname>$PName</pname>
-                <login>$Login</login>
-                <passwd>$Password</passwd>
-                <status>0</status>
-                <phone>$Phone</phone>
-                <email>$Email</email>
-                <address>$Address</address>
-                <city>$City</city>
-                <state>$State<state/>
-                <pcode>$PostalCode<pcode/>
-                <country>$Country</country>
-            </gen_info>
-        </add>
+            <add>
+                <gen_info>
+                    <cname>$CName</cname>
+                    <pname>$PName</pname>
+                    <login>$Login</login>
+                    <passwd>$Password</passwd>
+                    <status>0</status>
+                    <phone>$Phone</phone>
+                    <email>$Email</email>
+                    <address>$Address</address>
+                    <city>$City</city>
+                    <state>$State</state>
+                    <pcode>$PostalCode</pcode>
+                    <country>$Country</country>
+                </gen_info>
+            </add>
         </customer>
 “@
 
@@ -119,22 +119,22 @@ Function New-PleskSubscription{
     [XML] $XMLDocument = @”
        
         <customer>
-        <add>
-            <gen_info>
-                <cname>$CName</cname>
-                <pname>$PName</pname>
-                <login>$Login</login>
-                <passwd>$Password</passwd>
-                <status>0</status>
-                <phone>$Phone</phone>
-                <email>$Email</email>
-                <address>$Address</address>
-                <city>$City</city>
-                <state>$State<state/>
-                <pcode>$PostalCode<pcode/>
-                <country>$Country</country>
-            </gen_info>
-        </add>
+            <add>
+                <gen_info>
+                    <cname>$CName</cname>
+                    <pname>$PName</pname>
+                    <login>$Login</login>
+                    <passwd>$Password</passwd>
+                    <status>0</status>
+                    <phone>$Phone</phone>
+                    <email>$Email</email>
+                    <address>$Address</address>
+                    <city>$City</city>
+                    <state>$State</state>
+                    <pcode>$PostalCode</pcode>
+                    <country>$Country</country>
+                </gen_info>
+            </add>
         </customer>
 “@
 
@@ -146,29 +146,29 @@ Function New-PleskSubscription{
     #XML Document to create a subscription and assign it to the customer created in the previous step using the ID property from the WebResponse
     $XMLDocument = @”
        
-            <webspace>
+        <webspace>
             <add>
-              <gen_setup>
-                <name>$Domain</name>
-                <ip_address>10.0.1.4</ip_address>
-                <owner-id>$CustomerID</owner-id>
-              </gen_setup>
-              <hosting>
-                <vrt_hst>
-                  <property>
-                    <name>ftp_login</name>
-                    <value>$Login</value>
-                  </property>
-                  <property>
-                    <name>ftp_password</name>
-                    <value>$Password</value>
-                  </property>
-                  <ip_address>10.0.1.4</ip_address>
-                </vrt_hst>
-              </hosting>
-              <plan-name>Unlimited</plan-name>
+                <gen_setup>
+                    <name>$Domain</name>
+                    <ip_address>10.0.1.4</ip_address>
+                    <owner-id>$CustomerID</owner-id>
+                </gen_setup>
+                <hosting>
+                    <vrt_hst>
+                        <property>
+                            <name>ftp_login</name>
+                            <value>$Login</value>
+                        </property>
+                        <property>
+                            <name>ftp_password</name>
+                            <value>$Password</value>
+                        </property>
+                        <ip_address>10.0.1.4</ip_address>
+                    </vrt_hst>
+                </hosting>
+                <plan-name>Unlimited</plan-name>
             </add>
-          </webspace>
+        </webspace>
 “@ 
 
     Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 60
@@ -192,31 +192,30 @@ Function New-PleskUnassignedSubscription {
     )
         
     #XML Document to create a subscription not assigned to a customer (This will be assigned to the Admin account)
-    $XMLDocument = 
-    @”
+    $XMLDocument = @”
        
-            <webspace>
+        <webspace>
             <add>
-              <gen_setup>
-                <name>$Domain</name>
-                <ip_address>10.0.1.4</ip_address>
-              </gen_setup>
-              <hosting>
-                <vrt_hst>
-                  <property>
-                    <name>ftp_login</name>
-                    <value>$Login</value>
-                  </property>
-                  <property>
-                    <name>ftp_password</name>
-                    <value>$Password</value>
-                  </property>
-                  <ip_address>10.0.1.4</ip_address>
-                </vrt_hst>
-              </hosting>
-              <plan-name>Unlimited</plan-name>
+                <gen_setup>
+                    <name>$Domain</name>
+                    <ip_address>10.0.1.4</ip_address>
+                </gen_setup>
+                <hosting>
+                    <vrt_hst>
+                        <property>
+                            <name>ftp_login</name>
+                            <value>$Login</value>
+                        </property>
+                        <property>
+                            <name>ftp_password</name>
+                            <value>$Password</value>
+                        </property>
+                        <ip_address>10.0.1.4</ip_address>
+                    </vrt_hst>
+                </hosting>
+                <plan-name>Unlimited</plan-name>
             </add>
-          </webspace>
+        </webspace>
 “@  
 
     Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 60
