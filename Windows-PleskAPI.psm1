@@ -41,7 +41,7 @@
     )
         
 
-#XML Document to create a new customer
+    #XML Document to create a new customer
     [XML] $XMLDocument = @”
        
         <customer>
@@ -64,7 +64,7 @@
         </customer>
 “@
 
-Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 20
+    Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 20
 
 }
 
@@ -139,8 +139,8 @@ Function New-PleskSubscription{
 “@
 
 
-$CreatedCustomer = Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 20
-$CustomerID = ([XML]$CreatedCustomer.Content).packet.customer.add.result.id
+    $CreatedCustomer = Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 20
+    $CustomerID = ([XML]$CreatedCustomer.Content).packet.customer.add.result.id
 
 
     #XML Document to create a subscription and assign it to the customer created in the previous step using the ID property from the WebResponse
@@ -171,7 +171,7 @@ $CustomerID = ([XML]$CreatedCustomer.Content).packet.customer.add.result.id
           </webspace>
 “@ 
 
-Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 60
+    Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 60
 
 }
 
@@ -219,6 +219,6 @@ Function New-PleskUnassignedSubscription {
           </webspace>
 “@  
 
-Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 60
+    Invoke-WebRequest -URI "https://plesk.rsdtech.net:8443/enterprise/control/agent.php" -Headers $H -Body $XMLDocument -Method:Post -ContentType "application/xml" -ErrorAction:Stop -TimeoutSec 60
 
 }
